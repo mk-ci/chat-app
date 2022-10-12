@@ -1,9 +1,9 @@
   <div class= "first-box">
     <div class= "name-display">
-      <a href="#">Tom</a>
+      <%= link_to current_user.name, edit_user_path(current_user) %>
     </div>
     <div class= "new-btn">
-      <a href= "xxxxx" >チャットを作成する</a>
+      <a href= "#" >チャットを作成する</a>
     </div>
   </div>
 
