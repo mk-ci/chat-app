@@ -1,12 +1,29 @@
-<div class= "top-contents">
+<div class="message">
+  <div class="upper-message">
+    <div class="message-user">
+      <!-- 投稿したユーザー名情報を出力する -->
+
+    </div>
+    <div class="message-date">
+      <!-- 投稿した時刻を出力する -->
+
+    </div>
+  </div>
+  <div class="lower-message">
+    <div class="message-content">
+      <!-- 投稿したメッセージ内容を記述する -->
+
+    </div>
+  </div>
+</div><div class= "top-contents">
   <div class= "left-header">
     <div class= "room-title">
-      room1
+      <%= @room.name %>
     </div>
   </div>
   <div class= "right-header">
     <div class= "end-btn">
-      <a href="#">チャットを終了する</a>
+        <%= link_to "チャットを終了する", room_path(@room), method: :delete %>
     </div>
   </div>
 </div>
@@ -26,27 +43,20 @@
       </li>
     </ul>
   </div> %>
-    <div class="message">
-    <div class="upper-message">
-      <div class="message-user">
-        Tom
-      </div>
-      <div class="message-date">
-        2020/3/31(Wed) 12:43:30
-      </div>
+
+    <%# <div class="message">
+      <div class="upper-message"></div>
     </div>
     <div class="lower-message">
-      <div class="message-content">
-        おはよう
-      </div>
+      <div class="message-content">おはよう</div>
     </div>
-  </div>
-
+  
   <div class="message">
     <div class="upper-message">
       <div class="message-user">
         Tom
       </div>
+    
       <div class="message-date">
         2020/3/31(Wed) 12:47:30
       </div>
@@ -56,16 +66,17 @@
         こんばんは
       </div>
     </div>
-  </div>
+  </div> %>
+   <%= render partial: 'message', collection: @messages %>
 </div>
 
-<div class= "form">
+<%= form_with model: [@room, @message], class: 'form', local: true do |f| %>
   <div class="form-input">
-    <input class="form-message" placeholder="type a message">
+    <%= f.text_field :content, class: 'form-message', placeholder: 'type a message' %>
     <label class="form-image">
       <span class="image-file">画像</span>
-      <input type="file" class="hidden">
+      <%= f.file_field :image, class: 'hidden' %>
     </label>
   </div>
-  <input class="form-submit" type="submit" value="送信" >
-</div>
+  <%= f.submit '送信', class: 'form-submit' %>
+<% end %>
